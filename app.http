@@ -1,0 +1,18 @@
+POST http://localhost:3010/signup 
+Content-Type: application/json
+
+{
+    "username":"Rohit Reddy Pellakuru",
+    "password":"rohitreddy.p@2024",
+    "email":"rohitreddy.robspace@gmail.com",
+    "role":"admin"
+}
+
+###
+
+POST http://localhost:3010/login 
+Content-Type: application/json
+{
+    "email":"rohitreddy.robspace@gmail.com",
+    "password":"rohitreddy.p@2024",   
+}
