@@ -4,9 +4,7 @@ require("dotenv").config()
 
 const DBConnection = async() => {
     try{
-        await mongoose.connect(`${process.env.MONGO_URI}/taskList`,{
-            useNewUrlParser:true,
-        })
+        await mongoose.connect(`${process.env.MONGO_URI}/taskList`)
         console.log("DB Connected Successfully")
 
     }catch(err){
