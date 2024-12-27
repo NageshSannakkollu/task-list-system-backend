@@ -16,3 +16,6 @@ Content-Type: application/json
     "email":"rohitreddy.robspace@gmail.com",
     "password":"rohitreddy.p@2024",   
 }
+
+###
+GET http://localhost:3010/tasks 
