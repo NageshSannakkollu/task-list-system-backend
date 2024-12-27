@@ -74,5 +74,11 @@ const loginUser = async(req,res) => {
 
 }
 
+const getAllUsers = async(req,res) => {
+  const getUsers = await UserModel.find()
+  res.status(200).json(getUsers)
 
-module.exports = {registerUser,loginUser}
+}
+
+
+module.exports = {registerUser,loginUser,getAllUsers}
