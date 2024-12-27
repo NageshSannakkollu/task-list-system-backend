@@ -19,7 +19,7 @@ const registerUser = async(req,res) => {
         // console.log("User:",user)
 
     // Check if the user is already registered.
-
+        await DBConnection();
         const existingUser = await UserModel.findOne({ email: user.email });
 
         if (existingUser) {
@@ -52,6 +52,7 @@ const registerUser = async(req,res) => {
 
 const loginUser = async(req,res) => {
     const {email,password} = req.body;
+    await DBConnection();
     const user = await UserModel.findOne({email:email})
     console.log("User:",user)
 
@@ -75,8 +76,9 @@ const loginUser = async(req,res) => {
 }
 
 const getAllUsers = async(req,res) => {
-  const getUsers = await UserModel.find()
-  res.status(200).json(getUsers)
+    await DBConnection();
+    const getUsers = await UserModel.find()
+    res.status(200).json(getUsers)
 
 }
 

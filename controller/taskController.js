@@ -1,6 +1,8 @@
+const DBConnection = require("../config/db");
 const TaskListModel = require("../model/TaskModel")
 
 const createTaskRoute = async(req,res) => {
+
     try {
         const {name,description,dueDate,status,priority} = req.body;
         const createTask = {
@@ -10,6 +12,7 @@ const createTaskRoute = async(req,res) => {
             status:status,
             priority:priority
         }
+        await DBConnection();
         const checkTaskName = await TaskListModel.findOne({name:createTask.name})
         if (checkTaskName === null){
           await TaskListModel.create(createTask)
@@ -28,12 +31,14 @@ const createTaskRoute = async(req,res) => {
 }
 
 const getAllTasks = async(req,res) => {
+  await DBConnection();
   const getTasks = await TaskListModel.find()
   res.status(200).json(getTasks)
 }
 
 const getTaskById = async(req,res) => {
   const {id} = req.params;
+  await DBConnection();
   const getTaskDetails = await TaskListModel.findById({_id:id})
   // console.log(getTaskDetails)
   res.status(200).json(getTaskDetails)
@@ -42,12 +47,14 @@ const getTaskById = async(req,res) => {
 const updateTask = async(req,res)=> {
   const {id} = req.params;
   const {name,description,dueDate,status,priority} = req.body;
+  await DBConnection();
   const updateTask = await TaskListModel.findByIdAndUpdate({_id:id},{name,description,dueDate,status,priority})
   res.status(200).json({message:"Task Updated Successfully"})
 }
 
 const deleteTask = async(req,res) => {
   const{id} = req.params;
+  await DBConnection();
   const checkDeleteId = await TaskListModel.findById({_id:id})
   if(checkDeleteId !== undefined){
     await TaskListModel.findByIdAndDelete({_id:id})
